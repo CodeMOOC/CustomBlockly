@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Coding in your classroom, Blockly!</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+    <!-- Stylesheet links -->
+    <link rel="stylesheet" href="css/blockly-style.css">
+    <link rel="stylesheet" href="css/calibri.css">
+
+    <!-- JavaScript links -->
+    <script src="js/blockly_compressed.js"></script>
+    <script src="js/blocks_compressed.js"></script>
+    <script src="js/msg/js/it.js"></script>
+
+    <script src="js/acorn_interpreter.js"></script>
+    <script src="js/javascript_compressed.js"></script>
+
+    <!-- JavaScript custom blockly blocks -->
+    <script src="my_blocks.js"></script>
+    <script src="my_generator.js"></script>
+
+  </head>
+  <body>
+
+    <!-- UX Header section -->
+    <div id="header" align="center">
+      <div style="float: left; width: 28%; color: #EF92D0">.</div>
+      <div style="float: left; text-align: right;">
+        <img id="robot" src="media/ic-code_mooc.png">
+      </div>
+      <div style="float: left; text-align: left;">
+        <h1 style="font-size: 200%">Coding in your Classroom, Now!</h1>
+      </div>
+    </div>
+
+    <!-- Blockly section -->
+    <div id="container">
+      <div id="blocklyDiv" style="height: 80%; width: 100%;"></div>
+
+      <xml id="toolbox" style="display: none">
+        <category name="My Blocks" colour="0">
+          <block type="esegui"></block>
+          <block type="fine"></block>
+          <block type="vai_avanti"></block>
+          <block type="girati_sx"></block>
+          <block type="girati_dx"></block>
+          <block type="controls_if"></block>
+          <block type="ripeti_finche"></block>
+          <block type="ripeti_fino_a"></block>
+          <block type="ripeti"></block>
+          <block type="evento"></block>
+          <block type="test"></block>
+
+          <!-- Aggiungi qui i tuoi blocchi personalizzati -->
+          <!-- formato: <block type ="nome-del-blocco"></block> -->
+        </category>
+
+        <sep gap="32"></sep>
+
+        <category name="Text" colour="170">
+          <block type="text"></block>
+          <block type="text_length"></block>
+          <block type="text_print"></block>
+          <block type="text_prompt_ext">
+            <value name="TEXT">
+              <block type="text"></block>
+            </value>
+          </block>
+        </category>
+
+        <category name="Logic" colour="210">
+          <category name="If">
+            <block type="controls_if"></block>
+            <block type="controls_if">
+              <mutation else="1"></mutation>
+            </block>
+            <block type="controls_if">
+              <mutation elseif="1" else="1"></mutation>
+            </block>
+          </category>
+
+          <category name="Boolean">
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_negate"></block>
+            <block type="logic_boolean"></block>
+            <block type="logic_null"></block>
+            <block type="logic_ternary"></block>
+          </category>
+        </category>
+
+        <category name="Loops" colour="120">
+          <block type="controls_repeat_ext">
+            <value name="TIMES">
+              <block type="math_number">
+                <field name="NUM">10</field>
+              </block>
+            </value>
+          </block>
+          <block type="controls_whileUntil"></block>
+          <block type="controls_for">
+            <field name="VAR">i</field>
+            <value name="FROM">
+              <block type="math_number">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <value name="TO">
+              <block type="math_number">
+                <field name="NUM">10</field>
+              </block>
+            </value>
+            <value name="BY">
+              <block type="math_number">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+          <block type="controls_forEach"></block>
+          <block type="controls_flow_statements"></block>
+        </category>
+
+        <category name="Math" colour="230">
+          <block type="math_number"></block>
+          <block type="math_arithmetic"></block>
+          <block type="math_single"></block>
+          <block type="math_trig"></block>
+          <block type="math_constant"></block>
+          <block type="math_number_property"></block>
+          <block type="math_change">
+            <value name="DELTA">
+              <block type="math_number">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+          <block type="math_round"></block>
+          <block type="math_on_list"></block>
+          <block type="math_modulo"></block>
+          <block type="math_constrain">
+            <value name="LOW">
+              <block type="math_number">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <value name="HIGH">
+              <block type="math_number">
+                <field name="NUM">100</field>
+              </block>
+            </value>
+          </block>
+          <block type="math_random_int">
+            <value name="FROM">
+              <block type="math_number">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <value name="TO">
+              <block type="math_number">
+                <field name="NUM">100</field>
+              </block>
+            </value>
+          </block>
+          <block type="math_random_float"></block>
+        </category>
+
+        <category name="Lists" colour="250">
+          <block type="lists_create_empty"></block>
+          <block type="lists_create_with"></block>
+          <block type="lists_repeat">
+            <value name="NUM">
+              <block type="math_number">
+                <field name="NUM">5</field>
+              </block>
+            </value>
+          </block>
+          <block type="lists_length"></block>
+          <block type="lists_isEmpty"></block>
+          <block type="lists_indexOf"></block>
+          <block type="lists_getIndex"></block>
+          <block type="lists_setIndex"></block>
+        </category>
+
+        <category name="Variables" custom="VARIABLE" colour="330"></category>
+        <category name="Functions" custom="PROCEDURE" colour="290"></category>
+
+      </xml>
+
+      <script>
+        var workspace = Blockly.inject('blocklyDiv',
+                {media: 'media/',
+                  toolbox: document.getElementById('toolbox'),
+                  /*grid:
+                  {spacing: 20,
+                    length: 3,
+                    colour: '#ccc',
+                    snap: true},
+                  trashcan: true*/
+                });
+
+        var myInterpreter = null;
+
+        function initApi(interpreter, scope) {
+          // Add an API function for the alert() block.
+          var wrapper = function(text) {
+            text = text ? text.toString() : '';
+            return interpreter.createPrimitive(alert(text));
+          };
+          interpreter.setProperty(scope, 'alert',
+                  interpreter.createNativeFunction(wrapper));
+
+          // Add an API function for the prompt() block.
+          var wrapper = function(text) {
+            text = text ? text.toString() : '';
+            return interpreter.createPrimitive(prompt(text));
+          };
+          interpreter.setProperty(scope, 'prompt',
+                  interpreter.createNativeFunction(wrapper));
+
+          // Add an API function for highlighting blocks.
+          var wrapper = function(id) {
+            id = id ? id.toString() : '';
+            return interpreter.createPrimitive(highlightBlock(id));
+          };
+          interpreter.setProperty(scope, 'highlightBlock',
+                  interpreter.createNativeFunction(wrapper));
+        }
+
+        var highlightPause = false;
+
+        function highlightBlock(id) {
+          workspace.highlightBlock(id);
+          highlightPause = true;
+        }
+
+        function parseCode() {
+          // Generate JavaScript code and parse it.
+          Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+          Blockly.JavaScript.addReservedWords('highlightBlock');
+          var code = Blockly.JavaScript.workspaceToCode(workspace);
+          myInterpreter = new Interpreter(code, initApi);
+
+          document.getElementById('stepButton').disabled = '';
+          highlightPause = false;
+          workspace.traceOn(true);
+          //workspace.highlightBlock(null);
+          stepCode();
+        }
+
+        function stepCode() {
+          try {
+            var ok = myInterpreter.step();
+          } finally {
+            if (!ok) {
+              // Program complete, no more code to execute.
+              document.getElementById('stepButton').disabled = 'disabled';
+              return;
+            }
+          }
+          if (highlightPause) {
+            // A block has been highlighted.  Pause execution here.
+            highlightPause = false;
+          } else {
+            // Keep executing until a highlight statement is reached.
+            stepCode();
+          }
+        }
+
+        function discard(workspace) {
+          var count = workspace.getAllBlocks().length;
+          if (count < 2 ||
+                  window.confirm(Blockly.Msg.DELETE_ALL_BLOCKS.replace('%1', count))) {
+            workspace.clear();
+            if (window.location.hash) {
+              window.location.hash = '';
+            }
+          }
+
+          function stop(workspace){
+            document.getElementById('stepButton').disabled = 'disabled';
+            workspace.highlightBlock(null);
+            workspace.traceOn(false);
+            myInterpreter.stopBlockIncrementing_();
+            myInterpreter.stop();
+          }
+        }
+      </script>
+
+      <button id="runButton" class="notext play" title="Run the program." onclick="parseCode()">
+        <img src="media/1x1.gif" class="run icon21">
+      </button>
+      <button id="stepButton" class="notext" disabled="disabled" title="Run the program." onclick="stepCode()">
+        <img src="media/1x1.gif" class="step icon21">
+      </button>
+      <button id="trashButton" class="notext trash" title="Discard all blocks." onclick="discard(workspace)">
+        <img src="media/1x1.gif" class="trash icon21">
+      </button>
+    </div>
+
+  </body>
+</html>
