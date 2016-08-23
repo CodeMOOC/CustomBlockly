@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="css/blockly-style.css">
     <link rel="stylesheet" href="css/calibri.css">
 
-    <!-- JavaScript links -->
+    <!-- JavaScript Blockly links -->
+    <!-- blockly block files -->
     <script src="js/blockly_compressed.js"></script>
     <script src="js/blocks_compressed.js"></script>
     <script src="js/msg/js/it.js"></script>
 
+    <!-- blockly code interpreter files -->
     <script src="js/acorn_interpreter.js"></script>
     <script src="js/javascript_compressed.js"></script>
 
@@ -53,6 +55,7 @@
           <block type="ripeti"></block>
           <block type="evento"></block>
           <block type="test"></block>
+          <block type="avanti_molti"></block>
 
           <!-- Aggiungi qui i tuoi blocchi personalizzati -->
           <!-- formato: <block type ="nome-del-blocco"></block> -->
@@ -204,7 +207,9 @@
             trashcan: true,
             maxBlocks: 10*/
           });
+        /* full list of options: https://developers.google.com/blockly/guides/get-started/web */
 
+        // Blockly interpreter section
         var myInterpreter = null;
 
         function initApi(interpreter, scope) {
@@ -293,6 +298,7 @@
         }
       </script>
 
+      <!-- UX buttons for blockly interaction -->
       <button id="runButton" class="notext play" title="Run the program." onclick="parseCode()">
         <img src="media/1x1.gif" class="run icon21">
       </button>

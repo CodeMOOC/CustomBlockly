@@ -16,7 +16,7 @@ Blockly.Blocks['test'] = {
   }
 };
 
-Blockly.Blocks['avanti_dieci'] = {
+Blockly.Blocks['avanti_molti'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("vai avanti di")
