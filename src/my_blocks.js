@@ -29,3 +29,25 @@ Blockly.Blocks['avanti_molti'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['calcola'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("calcola")
+        .appendField(new Blockly.FieldDropdown([["somma", "OPTIONNAME"], ["prodotto", "OPTIONNAME"], ["differenza", "OPTIONNAME"]]), "NAME");
+    this.appendDummyInput()
+        .appendField("tra");
+    this.appendValueInput("operando_1")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("e");
+    this.appendValueInput("operando_2")
+        .setCheck("Number");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(180);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
