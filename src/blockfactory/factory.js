@@ -615,7 +615,7 @@ function updatePreview() {
     var rtl = newDir == 'rtl';
     previewWorkspace = Blockly.inject('preview',
         {rtl: rtl,
-         media: '../../media/',
+         media: '../media/',
          scrollbars: true});
     oldDir = newDir;
   }
@@ -772,7 +772,7 @@ function init() {
 
   var toolbox = document.getElementById('toolbox');
   mainWorkspace = Blockly.inject('blockly',
-      {toolbox: toolbox, media: '../../media/'});
+      {toolbox: toolbox, media: '../media/'});
 
   // Create the root block.
   if ('BlocklyStorage' in window && window.location.hash.length > 1) {

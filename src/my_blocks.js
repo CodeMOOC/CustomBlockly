@@ -51,3 +51,15 @@ Blockly.Blocks['calcola'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['img_codemooc'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("images/codemooc.png", 140, 50, "*"));
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(135);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};

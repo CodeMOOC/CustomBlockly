@@ -9,6 +9,11 @@ Blockly.JavaScript['test'] = function(block) {
     return code;
 };
 
+Blockly.JavaScript['img_codemooc'] = function(block) {
+    var code = '\n';
+    return code;
+};
+
 Blockly.JavaScript['avanti_molti'] = function(block) {
     // Print statement.
     var operator = block.getFieldValue('STEPS');
